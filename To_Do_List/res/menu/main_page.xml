@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.to_do_list.MainPage" >
+
+    <item
+        android:id="@+id/closeApp"
+        android:orderInCategory="1000"
+        android:title="CloseApp"/>
+
+</menu>

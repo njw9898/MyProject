@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    tools:context="com.example.to_do_list.TaskFragment" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp" >
+
+            <EditText
+                android:id="@+id/taskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:hint="Task Title"
+                android:textSize="30dp" />
+
+            <EditText
+                android:id="@+id/due"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/taskTitle"
+                android:layout_below="@+id/taskTitle"
+                android:enabled="false"
+                android:text="Due: "
+                android:textSize="30dp" />
+
+            <EditText
+                android:id="@+id/dueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/taskTitle"
+                android:layout_toRightOf="@+id/due"
+                android:hint="Date"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/importance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/due"
+                android:layout_marginTop="15dp"
+                android:text="Importance"
+                android:textSize="13dp" />
+
+            <RatingBar
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dueDate"
+                android:layout_toRightOf="@+id/importance"
+                android:numStars="5" />
+
+            <EditText
+                android:id="@+id/contents"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/star"
+                android:background="#55999999"
+                android:gravity="top"
+                android:hint="Contents"
+                android:textSize="15dp" />
+            
+            <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contents"
+                android:text="Confirm" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
