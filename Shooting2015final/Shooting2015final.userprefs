@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Player_Script.cs">
+    <Files>
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\GameController_Script.cs" Line="151" Column="15" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyBlue_Script.cs" Line="17" Column="28" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Asteroid_Script.cs" Line="41" Column="40" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyBoss_Script.cs" Line="79" Column="29" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\LaserHit_Script.cs" Line="16" Column="11" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\DestroyByBoundary_Script.cs" Line="1" Column="1" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyGreen_Script.cs" Line="70" Column="18" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyRed_Script.cs" Line="6" Column="15" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\EnemyShot_Script.cs" Line="14" Column="1" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\MainGUI_Script.cs" Line="11" Column="23" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\explosions_script.cs" Line="16" Column="3" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\Player_Script.cs" Line="50" Column="22" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\PlayerShipShots_Script.cs" Line="10" Column="36" />
+      <File FileName="Assets\2DSpaceShooterExample\CompleteProject\SS_Scripts\SharedValues_Script.cs" Line="17" Column="28" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
