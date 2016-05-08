@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ad img roller prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+// Added by junho
+    var $allVideos = $(".js-resize"),
+        $fluidEl = $("figure");
+
+    $allVideos.each(function() {
+      $(this)
+        // jQuery .data does not work on object/embed elements
+        .attr('data-aspectRatio', this.height / this.width)
+        .removeAttr('height')
+        .removeAttr('width');
+
+    });
+
+    $(window).resize(function() {
+
+      var newWidth = $fluidEl.width();
+      $allVideos.each(function() {
+
+        var $el = $(this);
+        $el
+            .width(newWidth)
+            .height(newWidth * $el.attr('data-aspectRatio'));
+
+      });
+
+    }).resize();
+</script>
+
+</head>
+<style type='text/css'>
+    body {
+        margin:0;
+        background-color: #000000;
+        /*color: #ffffff;*/
+    }
+
+    #wrapper {
+        /*border: 1px solid #ffffff;*/
+        /*width : 1104px;*/
+        width: 90%;
+        /*padding: 10px;*/
+        padding: 0;
+        position: relative;
+        /*position: absolute;*/
+        top: 10px;
+        left:50%;
+        /*margin-left: -533px;*/
+        /*margin-left: -600px;*/
+        margin-left: -48%;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    #slidebox {
+        position:relative;
+        /*width:800px;*/
+        width: 70%;
+        height:460px;
+        overflow:hidden;
+        white-space:nowrap;
+        /*border: 1px solid #487BE1;*/
+        float: left;
+        /*padding: 10px;*/
+        padding: 0;
+    }
+
+    #radioSet {
+        position: relative;
+        border: 3px solid #FFFFFF;
+        border-radius: 25px;
+        /*width: 270px;*/
+        width: 25%;
+        padding: 10px;
+        float: left;
+        /*margin-left: 10px;    */
+        margin-left: 4.99%;
+    }
+
+    #slidebox ul#slider {
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+    #slidebox ul li {
+        position:absolute;
+        width:0px;
+        height:0px;
+        margin: 40px 80px 80px 80px;
+    }
+    #slidebox ul li img {
+        width:640px; /*1430*/
+        height:380px; /*670*/
+    }
+
+    #thumbnailTop {
+        position:relative;
+        -webkit-box-align:center;
+        -webkit-box-pack:center;
+        display:-webkit-box;
+        /*width: 1239px;*/
+        width: 100%;
+        height:70px;
+        overflow: hidden;
+        white-space: nowrap;
+        border: 1px solid #000;
+        background-color: #ffffff;
+    }
+
+    #thumbnailTop ul#thumblistTop {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        /*background-color: #ffffff;*/
+    }
+    p {
+        color: #ffffff;
+    }
+
+    label {
+        color: #ffffff;
+    }
+
+    #thumbnailTop ul#thumblistTop li {
+        margin: 9px 9px 9px 9px;
+        padding: 0 0 0 0 ;
+        border: 20;
+        float: left;
+    }
+
+    #thumbnailTop ul li img {
+        width: 52px;
+        height: 52px;
+        /*margin: 10 10 10 10;
+        padding: 10 10 10 10;*/
+    }
+	#thumbnailBottom {
+        position:relative;
+        -webkit-box-align:center;
+        -webkit-box-pack:center;
+        display:-webkit-box;
+        /*width: 1239px;*/
+        width: 100%;
+        height:70px;
+        /*overflow: hidden;*/
+        white-space: nowrap;
+        border: 1px solid #000;
+        background-color: #ffffff;
+        
+    }
+
+    #thumbnailBottom ul#thumblistBottom {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #thumbnailBottom ul#thumblistBottom li {
+        margin: 9px 9px 9px 9px;
+        padding: 0 0 0 0 ;
+        border: 20;
+        float: left;
+    }
+
+    #thumbnailBottom ul li img {
+        width: 52px;
+        height: 52px;
+        /*margin: 10 10 10 10;
+        padding: 10 10 10 10;*/
+    }
+
+    fieldset.radiogroup  { 
+      margin: 0; 
+      padding: 0; 
+      margin-bottom: 1.25em; 
+      padding: .125px; 
+    } 
+
+    fieldset.radiogroup legend { 
+      margin: 0; 
+      padding: 0; 
+      font-weight: bold; 
+      margin-left: 20px; 
+      font-size: 100%; 
+      color: black; 
+    } 
+
+    ul.radio  { 
+      margin: 0; 
+      padding: 0; 
+      margin-left: 20px; 
+      list-style: none; 
+    } 
+
+    ul.radio li { 
+      border: 1px transparent solid; 
+    } 
+
+    ul.radio li:hover, 
+    ul.radio li:focus  { 
+      background-color: brown; 
+      border: 1px gray solid; 
+      width: 15em; 
+    }
+
+     div.pop-up {
+        display: none;
+        position: absolute;
+        width: 100px;
+        margin: 0px auto 0 auto;
+        padding: 0px;
+        border: 0px;
+      }
+
+
+</style>
+<body>
+
+    <!-- 20160121 modified by JunhoCha -->
+    <div id="thumbnailTop">
+        <ul id="thumblistTop">
+            <li id="s1">
+                <img src="img/streaming1.png" class="thumblistTop"/>
+             </li>
+            <li id="s2">
+                <img src="img/streaming2.png" class="thumblistTop"/>
+            </li>
+            <li id="s3">
+                <img src="img/streaming3.png" class="thumblistTop"/>
+            </li>
+            <li id="s4">
+                <img src="img/streaming4.png" class="thumblistTop"/>
+            </li>
+            <li id="s5">
+                <img src="img/streaming5.png" class="thumblistTop"/>
+            </li>
+            <!-- <li id="s6">
+                <img src="img/streaming6.png" class="thumblistTop"/>
+            </li>
+            <li id="s7">
+                <img src="img/streaming7.png" class="thumblistTop"/>
+            </li>
+            <li id="s8">
+                <img src="img/streaming8.png" class="thumblistTop"/>
+            </li>
+            <li id="s9">
+                <img src="img/streaming9.png" class="thumblistTop"/>
+            </li>
+            <li id="s10">
+                <img src="img/streaming10.png" class="thumblistTop"/>
+            </li> -->
+        </ul>
+    </div>
+    <div id="wrapper">
+            <div id="slidebox">
+            <ul id="slider">
+                <li id="v1">
+                    <iframe src='http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=3CA82D2F0807AB5725839B0E15C01DA829D9&outKey=V12212ca9db5d52afba034b9c4e17edaa4d63bfc9b3e746fa611d4b9c4e17edaa4d63&controlBarMovable=true&jsCallable=true&isAutoPlay=true&skinName=tvcast_white' 
+                    frameborder='0' WIDTH='640px' HEIGHT='360px' allowfullscreen style="position: absolute; z-index: 10; background:rgba(0,0,0,0.8); color:#ffffff;" ;> </iframe>
+
+                    <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                    <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+
+                </li>
+                <li id="v2">
+                    <iframe title='보는 것만으로도 '아찔'…눈보라 가르며 쾌속 질주 [비디오머그] 20160126'
+                    width='640' height='360' src='http://videofarm.daum.net/controller/video/viewer/Video.html?vid=s443ezjzKUSzzK1KAwVBbbS&play_loc=undefined&alert=true' 
+                    frameborder='0' scrolling='no' ></iframe>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v3">
+                    <iframe width="640" height="385" src="http://www.afreeca.com/player/player.html?isAfreeca=true&amp;autoPlay=true&amp;szBjId=afbjmagazine&amp;nStationNo=13505628&amp;nBbsNo=14486436&amp;nTitleNo=16177029&amp;szCategory=00210000&amp;szPart=REVIEW" 
+                    frameborder="0" id="Player"></iframe>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                
+                <li id="v4">
+                    <iframe class="js-resize" src="https://www.pooq.co.kr/player/clip.html?clipid=19404" style="width: 640px; height: 360px;" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen> </iframe>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v5">
+                    <!-- <iframe class="js-resize" src="http://www.gomtv.com/embed.gom?cubeid=14104701" style="width: 640px; height: 360px;" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen> </iframe> -->
+                    <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase=
+                    'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0' width=320 height=240 VIEWASTEXT>
+                        <param name="wmode" value="transparent" />
+                        <param name="movie" value="http://www.gomtv.com/14104701" />
+                        <param name="quality" value="high" />
+                        <embed src="http://www.gomtv.com/14104701" width="900px" height="450px">
+                    </object>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v11">
+                    <!-- YouTube Video Example -->
+                    <div>
+                        <iframe type="text/html" width="640" height="360" src="http://www.youtube.com/embed/FrG4TEcSuRg" frameborder="0" allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v12">
+                    <!-- <img src="img/streaming2.png" /> -->
+                    <figure>
+                        <iframe class="js-resize" src="http://player.vimeo.com/video/25924530?title=0&amp;byline=0&amp;portrait=0" frameborder="0" data-aspectratio="0.5625" style="width: 640px; height: 360px;"></iframe>
+
+                    </figure>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v13">
+                    <img src="video/yahoo_cancel.png" style="width: 640px; height: 360px;"/>
+                    <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v14">
+                    <iframe class="js-resize" src="http://www.dailymotion.com/embed/video/x3253ey_veteran-베테랑-trailer-korean-action-2015_shortfilms" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen width="640px;" height="360px"> </iframe>
+                    <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li id="v15">
+                    <iframe class="js-resize" width="640px" height="360px" src="http://www.hulu.com/embed.html?eid=wvqxnyjrtho0a6osltsuig" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>
+                   <div class="skipContainer" style="position: absolute; top:0; left: 0; z-index:11; width:130px; height:60px; color:#FF0000; visibility:hidden;"><div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; "><img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/></div>
+                        <div class="skipBtn" style="position: absolute; width:130px; height: 20px; background-color:#000000; text-align:center; margin: 0 auto;"> <img class="skipBtn_img" src="img/skip_button.png" style="position: absolute; width:65px; height: 20px; " onclick="skip_func()"/>
+                            
+                        </div>
+                    </div>
+                </li>            
+            </ul>
+        </div>
+       <!-- Modified by Jaewoo -->
+        <div id ="radioSet" class="container">
+          <h2>Ad Options</h2>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#timerBtn">Timer button</a></li>
+            <li><a data-toggle="tab" href="#skipBtn">Skip button</a></li>
+            
+          </ul>
+
+
+
+          <div class="tab-content">
+             <div id="timerBtn" class="tab-pane fade in active">
+                <fieldset class="radiogroup"> 
+                    <form name="timerRadioBtn">
+                        <ul class="radio"> 
+                            <li><input type="radio" name="timer" id="tradio1" value="timerLogo" /><label for="tradio1">로고배너</label></li> 
+                            <li><input type="radio" name="timer" id="tradio5" value="timerFadeIn" /><label for="tradio5">애니메이션 배너</label></li> 
+                            <li><input type="radio" name="timer" id="tradio4" value="timerFadeOut" /><label for="tradio4">페이드 아웃-백그라운드 배너</label></li>
+                        </ul> 
+                    <input type="button" onclick= "getTimerBtnValue()" value="확인">
+                    </form>
+                </fieldset> 
+                <script>
+                    var isBusy = 0;
+                        function getTimerBtnValue() {
+                            skip_func();
+                            if(isBusy == 1) return;
+                            //skipRadioBtn.skip[i].unchecked;
+                            for(var i=0; i < timerRadioBtn.timer.length; i++){
+                                 if(timerRadioBtn.timer[i].checked){
+
+                                    var checking = timerRadioBtn.timer[i].value;
+                                    var banner = document.getElementsByClassName('skipContainer')[curSlideNo];
+                                    var banner_top = document.getElementsByClassName('skipAd')[curSlideNo];
+                                    var banner_bottom = document.getElementsByClassName('skipBtn')[curSlideNo];
+                                    var banner_top_img = document.getElementsByClassName('skipAd_img')[curSlideNo];
+                                    var banner_bottom_img = document.getElementsByClassName('skipBtn_img')[curSlideNo];
+                                    var second = 5;
+                                    if ( banner.style.visibility == "hidden" ) {
+                                        banner.style.visibility = "visible";
+                                    }
+
+                                   banner.style.background = "#000000";
+                                   banner.style.opacity = "1.0";
+                                   banner.style.top = "230px";
+                                   banner.style.left = "440px";
+                                   banner_top.style.width = "130px";
+                                   banner_top.style.height = "40px";
+                                   banner_top_img.src = "img/nike_logo.png";
+                                   banner_bottom.style.width = "70px";
+                                   banner_bottom.style.height = "20px";
+                                   banner_bottom_img.style.width = "70px";
+                                   banner_bottom_img.style.height = "20px";
+                                   banner_bottom_img.src = "img/skip_button.png";
+                                   banner_bottom.style.opacity = 1.0;
+
+                                 if(checking=="timerLogo"){
+                                        banner.style.background = "#000000";
+                                        banner_bottom_img.style.width = "0px";
+                                        banner_bottom_img.style.height = "0px";
+                                        // Added by junho in gangnam 20160222
+                                        banner_bottom.style.width = "130px";
+                                        // ---------------------------------
+                                        banner_bottom.style.left = "0px";
+                                        banner_bottom.style.top = "40px";
+                                        banner_bottom.style.color="white";
+                                        countdown(banner_bottom, banner_bottom_img, second);
+                                 }
+
+                                 // Logo Animation with timer ---- 20160215 Modified by JaeYeopLee
+                                 else if(checking=="timerFadeIn"){
+                                    banner_bottom_img.style.width = "0px";
+                                    banner_bottom_img.style.height = "0px";
+                                    banner_bottom.style.top = "40px";
+                                    banner_bottom.style.left = "25px";
+                                    banner_top.innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/nike_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(2)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div><div id='curtain' style='position: absolute; top:0px; left:0px; z-index:15; width:130px; height:40px; background-color:white;'></div>";
+
+                                    aniTimer(banner, banner_bottom, banner_bottom_img, 0);
+                                 }
+
+                                     else if( checking == "timerFadeOut" ) {
+                                          banner_top = document.getElementsByClassName('skipAd')[curSlideNo];
+                                          banner_top_img = document.getElementsByClassName('skipAd_img')[curSlideNo];
+                                          banner_top.style.height = "60px";
+                                          banner_top_img.style.height = "60px";
+                                          banner_bottom.style.width = "75px";
+                                          banner_bottom_img.style.width = "80px";
+                                          banner_bottom.style.top = "20px";
+                                          banner_bottom.style.left = "25px";
+                                          banner_bottom.style.opacity = "0.7";
+                                          countdown(banner_bottom, banner_bottom_img, second);
+
+                                     }
+                                 }
+                                     
+                            }
+                        }
+                        // Skip timer count down ---- 20160214 Modified by JaeYeopLee
+                        // How to control div class='pop-up' ?
+                        function countdown($botDiv, $botImg,second) {
+                            document.getElementById('btnSkip').disabled = true;
+                            isBusy = 1;
+                            $botDiv.innerHTML = "Skip " + second + "sec(s)";
+
+                            // Modified by Junho in New GangNam
+                            
+                                if( second <= 0 ){
+                                    // Fade-Out
+                                    if ( $botDiv.style.top == "20px" ) {
+                                        $botDiv.style.left = "25px";
+                                        $botDiv.innerHTML = "<img class='skipBtn_img' src='img/skip_button.png' style='position:absolute; width:65px; height: 20px; left: 0px;' onclick='skip_func()'/>";    
+                                    }
+                                    // Skip Logo
+                                    else {
+                                        $botDiv.style.left = "0px";
+                                        $botDiv.innerHTML = "<img class='skipBtn_img' src='img/skip_button.png' style='position:absolute; width:65px; height: 20px; left: 30px;' onclick='skip_func()'/>";    
+                                    }
+                                    
+                                    isBusy = 0;
+                                    document.getElementById('btnSkip').disabled = false;
+                                    return;
+                                }
+                                second--;
+                                setTimeout(function(){countdown($botDiv,$botImg,second);}, 1000);
+                        }  
+                        // Logo fade in from left !!Should be fixed to async!! ---- 20160214 Modified by JaeYeopLee
+                        function aniTimer($banner,$botDiv, $botImg, second, btnUse) {
+                            // if btnUse = 0, disabling skip_button
+                            if ( btnUse == 0 ) document.getElementById('btnSkip').disabled = true;
+
+                            var blinder = document.getElementsByClassName('skipAd')[curSlideNo].childNodes[2];
+                            var size = parseInt(blinder.style.width,10);
+                            var x = parseInt(blinder.style.left,10);
+
+                            isBusy = 1;
+                            
+                            if( $banner.style.visibility == "hidden" ) {
+                                document.getElementsByClassName('skipAd')[curSlideNo].innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/nike_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(2)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div>";
+
+                                isBusy = 0;
+                                return;
+                            }
+                                
+                                // how to control div class='pop-up' ?
+                            if( second >= 5000 && second <= 5020 ) {
+
+                                $botDiv.style.left = "0";
+                                $botDiv.innerHTML = "<img class='skipBtn_img' src='img/skip_button.png' style='position:absolute; width:65px; height: 20px; left: 30px;' onclick='skip_func()'/>";
+                                document.getElementById('btnSkip').disabled = false;
+                            }
+                            else if ( second < 5000 ) {
+                                $botDiv.innerHTML = "Skip " + ( 5 - parseInt( second / 1000, 10 ) ) + "sec(s)";
+                            }
+
+                            else if ( second % 6000 == 0 ) {
+                                document.getElementsByClassName('skipAd')[curSlideNo].innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/nike_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(2)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div><div id='curtain' style='position: absolute; top:0px; left:0px; z-index:15; width:130px; height:40px; background-color:white;'></div>";                                
+                            }
+                            
+                            if ( size > 0 ){
+                                blinder.style.left = ( x + 1 ) + "px";
+                                blinder.style.width = ( size - 1 ) + "px";
+                            }
+
+                            second += 15;
+                            setTimeout( function () {
+                                aniTimer($banner, $botDiv, $botImg, second, 1);
+                                }, 15);
+                        }
+                </script> 
+            </div>
+
+            <div id="skipBtn" class="tab-pane fade">
+                <fieldset class="radiogroup"> 
+                    <form name="skipRadioBtn">
+                    <!-- bg 상단 하단 좌측 우측 -->
+                        <ul class="radio"> 
+                            <li><input type="radio" name="skip" id="skradio1" value="skipLogo" /><label for="skradio1">로고배너</label></li> 
+                            <li><input type="radio" name="skip" id="skradio3" value="skipAniText" /><label for="skradio3"> 애니메이션 배너</label></li> 
+                            <li><input type="radio" name="skip" id="skradio5" value="skipFadeOut" /><label for="skradio5">페이드 아웃-백그라운드 배너</label></li> 
+                        </ul> 
+                        <input id="btnSkip" type="button" oNclick= "getBtnValue()" value="확인">
+                    </form>
+                </fieldset> 
+                 <script>
+                 // 20160204 Modified by JunhoCha
+                        function getBtnValue() {
+                            skip_func();
+                           for(var i=0; i < skipRadioBtn.skip.length; i++)
+
+                                 if(skipRadioBtn.skip[i].checked) {
+                                    var checking = skipRadioBtn.skip[i].value;
+                                    var banner = document.getElementsByClassName('skipContainer')[curSlideNo];
+                                    var banner_top = document.getElementsByClassName('skipAd')[curSlideNo];
+                                    var banner_bottom = document.getElementsByClassName('skipBtn')[curSlideNo];
+                                    var banner_top_img = document.getElementsByClassName('skipAd_img')[curSlideNo];
+                                    var banner_bottom_img = document.getElementsByClassName('skipBtn_img')[curSlideNo];
+                                    if ( banner.style.visibility == "hidden" ) {
+                                        banner.style.visibility = "visible";
+                                    }
+
+                                    // ------------------------------ Animation curtain remove
+                                   banner_top.innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div>";
+                                   
+                                   banner.style.background = "#000000";
+                                   banner.style.opacity = "1.0";
+                                   banner.style.top = "230px";
+                                   banner.style.left = "440px";
+                                   banner_top.style.width = "130px";
+                                   banner_top.style.height = "40px";
+                                   banner_top_img.src = "img/samsung_logo.png";
+                                   banner_bottom.style.width = "70px";
+                                   banner_bottom.style.height = "20px";
+                                   banner_bottom_img.style.width = "70px";
+                                   banner_bottom_img.style.height = "20px";
+                                   banner_bottom_img.src = "img/skip_button.png";
+                                   banner_bottom.style.opacity = 1.0;
+
+                                    // 로고배너
+                                    if ( checking == "skipLogo" ) {
+
+                                        banner.style.background = "#000000";
+                                        banner.style.opacity = "1.0";
+                              
+                                        banner_bottom.style.width = "130px";
+                                        banner_bottom.style.top = "40px";
+                                        banner_bottom.style.left = "0px";
+                                        banner_bottom_img.style.left = "30px";
+
+                                    }
+
+                                    // 텍스트 애니메이션 배너
+                                    else if ( checking == "skipAniText" ) {
+                                        banner.style.background = "";
+                                        banner.style.background = "#000000";
+                                        banner.style.opacity = "1.0";
+                              
+                                        banner_bottom.style.width = "130px";
+                                        banner_bottom.style.top = "40px";
+                                        banner_bottom.style.left = "0px";
+                                        banner_bottom_img.style.left = "30px";
+
+                                        banner_top.innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div><div id='curtain' style='position: absolute; top:0px; left:0px; z-index:15; width:130px; height:40px; background-color:white;'></div>";                                        
+                                        
+                                        ani(banner,0);
+                                    }
+                                    
+                                    // top_banner : (w: 130px, h: 40px)
+                                    // bottom_banner : (w:65px, h: 20px)
+                                    // 페이드 아웃-백그라운드 배너
+                                    else if ( checking == "skipFadeOut" ) {
+                                          banner_top = document.getElementsByClassName('skipAd')[curSlideNo];
+                                          banner_top_img = document.getElementsByClassName('skipAd_img')[curSlideNo];
+                                          banner_top.style.height = "60px";
+                                          banner_top_img.style.height = "60px";
+                                          banner_bottom.style.top = "20px";
+                                          banner_bottom.style.left = "25px";
+                                          banner_bottom.style.opacity = "0.7";
+                                          banner_bottom_img.style.left = "0px";
+
+                                      }
+
+                                      break;
+                                 }
+                            }
+
+                            function openPage($num) {
+                                $url = "";
+
+                                if ( $num == 1 ) $url = "http://www.samsung.co.kr/main.do";
+                                else if ( $num == 2 ) $url = "http://www.nike.co.kr/display/displayShop.lecs?stonType=P";
+
+                                window.open($url);
+                            }
+
+                            function ani($banner, second) {
+                                var blinder = document.getElementsByClassName('skipAd')[curSlideNo].childNodes[2];
+                                var size = parseInt(blinder.style.width,10);
+                                var x = parseInt(blinder.style.left,10);
+                                
+                                if( $banner.style.visibility == "hidden" ){
+                                    document.getElementsByClassName('skipAd')[curSlideNo].innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div>";
+
+                                    
+                                    return;
+                                }
+
+                                if( size > 0 ) {
+                                    blinder.style.left = ( x + 1 ) + "px";
+                                    blinder.style.width = ( size - 1 ) + "px";
+                                }
+
+
+                                // Modified by Junho in Earing
+                                if(second%6000 == 0){
+                                    document.getElementsByClassName('skipAd')[curSlideNo].innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div><div id='curtain' style='position: absolute; top:0px; left:0px; z-index:15; width:130px; height:40px; background-color:white;'></div>";
+                                }
+
+                                second += 15;
+                                setTimeout(function () {
+                                    ani($banner,second);
+                                    }, 15);
+                            }
+// <div class="skipAd" style="position: absolute; width:130px; height:40px; background:#FFFFFF; ">
+//                             <a href = "#" class = "trigger"> <img class="skipAd_img" src="img/samsung_logo.png" style="position: absolute; width:130px; height:40px; background:#FFFFFF" onclick = "openPage(1)"/>
+//                             </a>
+
+//                             <div class="pop-up">
+//                                     <img src="img/do_not_skip.png" style="position: absolute; z-index: 15; width:100px; height: 50px;">
+//                                 </div>
+
+
+
+
+                            function skip_func() {
+                                alert('skip_func start!');
+                                isBusy = 0;
+
+                                // All timer function clearing.
+                                // var x = setTimeout('');
+                                // for (var i = 0; i < x; i++) clearTimeout(x);
+
+                                document.getElementById('btnSkip').disabled = false;
+                                var temp_div = document.getElementsByClassName('skipContainer')[curSlideNo];
+                                var top_div = temp_div.childNodes[1];
+                                top_div.innerHTML = "<img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/>";
+                                // document.getElementsByClassName('skipAd')[curSlideNo].innerHTML = "<a href = '#' class= 'trigger'><img class='skipAd_img' src='img/samsung_logo.png' style='position:absolute; width:130px; height:40px; background:#FFFFFF' onclick='openPage(1)'/></a><div class='pop-up'><img src='img/do_not_skip.png' style='position:absolute; z-index:15; width: 100px; height: 50px;'></div>";
+                                temp_div.style.visibility = "hidden";
+                                alert('skip_func finish!');
+                            }
+                    </script> 
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- 20160121 modified by JunhoCha -->
+    <div id="thumbnailBottom">
+        <ul id="thumblistBottom">
+            <li id="f1">
+                <img src="img/streaming11.png" class="thumblistBottom"/>
+            </li>
+            <li id="f2">
+                <img src="img/streaming12.png" class="thumblistBottom"/>
+            </li>
+            <li id="f3">
+                <img src="img/streaming13.png" class="thumblistBottom"/>
+            </li>
+            <li id="f4">
+                <img src="img/streaming14.png" class="thumblistBottom"/>
+            </li>
+            <li id="f5">
+                <img src="img/streaming15.png" class="thumblistBottom"/>
+            </li>
+            <!-- <li id="f6">
+                <img src="img/streaming16.png" class="thumblistBottom"/>
+            </li>
+            <li id="f7">
+                <img src="img/streaming17.png" class="thumblistBottom"/>
+            </li>
+            <li id="f8">
+                <img src="img/streaming18.png" class="thumblistBottom"/>
+            </li>
+            <li id="f9">
+                <img src="img/streaming19.png" class="thumblistBottom"/>
+            </li> -->
+        </ul>
+    </div>
+
+
+
+    <script type='text/javascript'>
+        var x = 1430;
+        var slider = document.getElementById("slider");
+        var slideArray = slider.getElementsByTagName("li");
+        var slideMax = slideArray.length - 1;
+        var curSlideNo = 0;
+ 
+        for (i = 0; i <= slideMax; i++) {
+            if (i == curSlideNo) slideArray[i].style.left = 0;
+            else slideArray[i].style.left = -x + "px";
+        }
+ 
+        slider.addEventListener('click', function () {
+			curSlideNo + 1 > slideMax ? changeSlide(0) : changeSlide(curSlideNo+1);
+        }, false);
+ 
+        var aniStart = false;
+        var next = 1;
+        var changeSlide = function(n){
+            if (aniStart === true) 
+				return;
+			next = curSlideNo + 1;
+			if (next > slideMax) 
+				next = 0;
+            aniStart = true;
+			slideArray[next].style.left = x + "px";
+            sliding(n);
+        }
+ 
+
+        // image sliding function
+    //     function sliding(n) {
+				// var curX = parseInt(slideArray[curSlideNo].style.left, 10);
+				// var nextX = parseInt(slideArray[next].style.left, 10);
+				// var newCurX = curX - 10;
+				// var newNextX = nextX - 10;
+				// if ( newCurX <= -x) {
+				// 	slideArray[curSlideNo].style.left = -x + "px";
+				// 	slideArray[next].style.left = 0;
+				// 	curSlideNo = curSlideNo + 1;
+				// 	if (curSlideNo > slideMax) curSlideNo = 0;
+				// 	if(curSlideNo != n){
+				// 		next = curSlideNo + 1;
+				// 		if (next > slideMax) next = 0;
+				// 		setTimeout(function () {
+				// 			sliding(n);
+				// 		}, 1);
+				// 		return;
+				// 	} else{
+				// 		aniStart = false;
+				// 		return;
+				// 	}
+				// }
+				// slideArray[curSlideNo].style.left = newCurX + "px";
+				// slideArray[next].style.left = newNextX + "px";
+				// setTimeout(function () {
+				// 	sliding(n);
+				// }, 1);
+    //     }
+		
+		function changeBox( n ) {
+                // alert("Slide :" + slide  + " n : " + n);
+            slideArray[curSlideNo].style.left = -x + "px";
+            slideArray[n].style.left = 0 + "px";
+            curSlideNo = n;
+            next = curSlideNo + 1;
+            if(next > slideMax) 
+               next = 0;
+        }
+      
+      <!-- 20160121 modified by JunhoCha-->
+      var thumbTop = document.getElementById("thumblistTop");
+      var thumblistTop = thumbTop.getElementsByTagName("li");
+      var thumbLengthTop = thumblistTop.length;
+      for(i=0; i< thumbLengthTop; i++ ){
+         thumblistTop[i].addEventListener("click", function () {
+            // Image Identify with Id.
+            var clckNum = this.id.substring(1,2) -1;
+            changeBox(clckNum);
+         }, false);
+      }
+      
+      <!-- 20160121 modified by JunhoCha -->
+      var thumbBottom = document.getElementById("thumblistBottom");
+      var thumblistBottom = thumbBottom.getElementsByTagName("li");
+      var thumbLengthBottom = thumblistTop.length;
+      for(i=0; i< thumbLengthBottom; i++ ){
+         thumblistBottom[i].addEventListener("click", function () {
+            // Image Identify with Id.
+            var clckNum = this.id.substring(1,2) -1 + thumbLengthTop;
+            changeBox(clckNum);
+         }, false);
+      }
+    </script>
+</body>
+</html>  
